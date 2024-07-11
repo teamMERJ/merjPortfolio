@@ -61,6 +61,9 @@ const SignIn = () => {
             </button>
           </div>
         </form>
+        <p className="mt-4 text-center">
+          Don't have an account? <Link to="/signup" className="text-white">Sign Up</Link>
+        </p>
       </div>
     </div>
   );
