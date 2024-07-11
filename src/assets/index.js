@@ -1,3 +1,4 @@
-import reactLogo from "./images/react.svg"
 
-export {reactLogo}
+import signUpImg from "./images/signup.jpg"
+
+export { signUpImg}
