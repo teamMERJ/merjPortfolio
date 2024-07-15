@@ -1,49 +1,105 @@
-import { Award, BookText, BriefcaseBusiness, CircleUserIcon, EarthLock, GraduationCap, HelpingHand, MessageCircleCode } from "lucide-react";
+import { Award, AwardIcon, BookText, BookTextIcon, BriefcaseBusiness, BriefcaseBusinessIcon, CircleUserIcon, EarthLock, EarthLockIcon,  GraduationCap,  GraduationCapIcon,  LayoutDashboard, MessageCircleCode } from "lucide-react";
 
-const K= {
+
+  const K = {
     NAVLINKS: [
         {
-            icon: <CircleUserIcon />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:< LayoutDashboard/>,
+            text: "Overview",
+            link:"/dashboard"
         },
         {
-            icon: <GraduationCap />,
+            icon:<CircleUserIcon/>,
             text: "Profile",
-            link: "/dashboard"
+            link:"/dashboard/profile"
         },
         {
-            icon: <EarthLock />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:<GraduationCap/>,
+            text: "Education",
+            link:"/dashboard/education"
         },
         {
-            icon: <BriefcaseBusiness />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:<EarthLock/>,
+            text: "Projects",
+            link:"/dashboard/projects"
         },
         {
-            icon: <BookText />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:<BriefcaseBusiness/>,
+            text: "Experience",
+            link:"/dashboard/experience"
         },
         {
-            icon: <Award />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:<BookText/>,
+            text: "Skills",
+            link:"/dashboard/skills"
         },
         {
-            icon: <HelpingHand />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:<Award/>,
+            text: "Achievements",
+            link:"/dashboard/achievements"
         },
+       
         {
-            icon: <MessageCircleCode />,
-            text: "Profile",
-            link: "/dashboard"
+            icon:<MessageCircleCode/>,
+            text: "Socials",
+            link:"/dashboard/socials"
         },
         
     ],
+
+        OVERVIEW: [
+            {
+                icon: <GraduationCapIcon/>,
+                text: "Education",
+                total: 5,
+            },
+            {
+                icon: <EarthLockIcon/>,
+                text: "Projects",
+                total: 10,
+            },
+            {
+                icon: <BriefcaseBusinessIcon/>,
+                text: "Experience",
+                total: 30,
+            },
+            {
+                icon: <BookTextIcon/>,
+                text: "Skills",
+                total: 30,
+            },
+            {
+                icon: <AwardIcon/>,
+                text: "Achievements",
+                total: 30,
+            },
+           
+        ],
+
+    SKILLS: [
+        {
+            name:"HTML",
+            levelOfProciency: "Advanced",
+        },
+        {
+            name:"CSS",
+            levelOfProciency: "Advanced",
+        },
+        {
+            name:"JavaScript",
+            levelOfProciency: "Intermediate",
+        },
+        {
+            name:"TypeScript",
+            levelOfProciency: "Beginner",
+        },
+        {
+            name:"React",
+            levelOfProciency: "Beginner",
+        },
+    ]
+
+
 };
 
 export default K;
