@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import K from "../constants"
+import K from "../konstants/index"
 
 
 const Sidebar = () => {
@@ -14,7 +14,7 @@ const currentPath = paths[2]
                 <div className="">
                 </div>
                 <div className=" flex flex-col justify-center items-center gap-y-3  w-[240px]">
-                {K.DASHBOARDLINKS.map(
+                {K.NAVLINKS.map(
                     (item, index) => {
                         return (
                         <Link key={index} to={item.path} 

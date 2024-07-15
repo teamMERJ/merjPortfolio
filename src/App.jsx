@@ -16,7 +16,7 @@ import SignUp from "./pages/SignUp"
 import Projects from "./pages/DashboardPage/Pages/Projects/Projects"
 import Experience from "./pages/DashboardPage/Pages/Experience/Experience"
 import Education from "./pages/DashboardPage/Pages/Education/Education"
-import Profile from "./pages/DashboardPage/Pages/profile/Profile"
+import Profile from "./pages/DashboardPage/Pages/Profile/Profile"
 import Achievements from "./pages/DashboardPage/Pages/Achievements/Achievements"
 import Volunteering from "./pages/DashboardPage/Pages/Volunteering/Volunteering"
 

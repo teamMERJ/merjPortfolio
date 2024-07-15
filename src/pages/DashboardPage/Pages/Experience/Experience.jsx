@@ -1,10 +1,15 @@
-import PagesLayout from "../layouts/PagesLayout"
+import PagesLayout from "../../layouts/PagesLayout"
+
 
 const Experience = () => {
   return (
     <PagesLayout>
-      <span>Experience Here</span>
+      <span>
+        Experience Here
+
+      </span>
     </PagesLayout>
+
   )
 }
 
