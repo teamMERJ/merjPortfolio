@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MailIcon, LockClosedIcon } from '@heroicons/react/outline';
 import { useForm } from "react-hook-form";
+import { apiLogin } from '../services/auth';
 
 const SignIn = () => {
   const {
@@ -10,8 +11,19 @@ const SignIn = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+
+    try {
+      const res = await apiLogin({
+        email: data.email,
+        password: data.password
+      })
+      console.log("Response:", res);
+      console.log("Second: I got called");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary via-yellow-400 to-primary">
