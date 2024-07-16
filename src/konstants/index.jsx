@@ -1,50 +1,50 @@
-import { Award, AwardIcon, BookText, BookTextIcon, BriefcaseBusiness, BriefcaseBusinessIcon, CircleUserIcon, EarthLock, EarthLockIcon,  GraduationCap,  GraduationCapIcon,  LayoutDashboard, MessageCircleCode } from "lucide-react";
+import { CalculatorIcon, HomeIcon, UserIcon } from "@heroicons/react/outline";
+import { Award, AwardIcon, BookText, BookTextIcon, BriefcaseBusiness, BriefcaseBusinessIcon, CircleUserIcon, EarthLock, EarthLockIcon,  GraduationCap,  GraduationCapIcon,  LayoutDashboard, LogOutIcon, Medal, MessageCircleCode } from "lucide-react";
 
 
   const K = {
     NAVLINKS: [
         {
-            icon:< LayoutDashboard/>,
-            text: "Overview",
-            link:"/dashboard"
+            name: "Overview",
+            path: "",
         },
         {
-            icon:<CircleUserIcon/>,
-            text: "Profile",
-            link:"/dashboard/profile"
+            name: "Profile",
+            path: "profile",
+            Icon: <UserIcon width={20} height={20} />
         },
         {
-            icon:<GraduationCap/>,
-            text: "Education",
-            link:"/dashboard/education"
+            name: "Education",
+            path: "education",
+            Icon: <UserIcon width={20} height={20} />
         },
         {
-            icon:<EarthLock/>,
-            text: "Projects",
-            link:"/dashboard/projects"
+            name: "Skills",
+            path: "skills",
+            Icon: <HomeIcon width={20} height={20} />
         },
         {
-            icon:<BriefcaseBusiness/>,
-            text: "Experience",
-            link:"/dashboard/experience"
+            name: "Experiences",
+            path: "experience",
+            Icon: <CalculatorIcon width={20} height={20} />
         },
         {
-            icon:<BookText/>,
-            text: "Skills",
-            link:"/dashboard/skills"
+            name: "Projects",
+            path: "projects",
+            Icon: <Medal width={20} height={20} />
         },
         {
-            icon:<Award/>,
-            text: "Achievements",
-            link:"/dashboard/achievements"
+            name: "Achievements",
+            path: "achievements",
+            Icon: <Medal width={20} height={20} />
         },
-       
+
         {
-            icon:<MessageCircleCode/>,
-            text: "Socials",
-            link:"/dashboard/socials"
+            name: "Log Out",
+            path: "/",
+            Icon: <LogOutIcon width={20} height={20} />
         },
-        
+
     ],
 
         OVERVIEW: [

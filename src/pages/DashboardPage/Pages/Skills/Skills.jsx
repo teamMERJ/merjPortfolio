@@ -1,19 +1,20 @@
-import PagesLayout from "../../layouts/PagesLayout"
-import K from "../../../../konstants"
+import { useNavigate } from 'react-router-dom'
+import PagesLayout from '../../layouts/PagesLayout'
+
 
 const Skills = () => {
-  return (
-    <PagesLayout headerText="Skills" buttonText="Add New Skills">
-      <div className="grid grid-cols-4 gap-6">
-        {K.SKILLS.map(({name, levelOfProficiency,}) => (
-          <div key={index} className="h-40 sh">
-            <span>{name}</span>
-            <span>{levelOfProficiency}</span>
-          </div>
-        ))} 
-      </div>
-    </PagesLayout>
-  )
+    const navigate = useNavigate()
+    return (
+        <div>
+          
+            <PagesLayout headerText='Skills'
+                buttonText='Add New' onClick={()=> navigate("/dashboard/skills/add-skill")}
+                children='' />
+            
+            <span>Skills list here</span>
+
+        </div>
+    )
 }
 
-export default Skills;
+export default Skills

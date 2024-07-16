@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import K from "../konstants/index"
+import K from "../konstants"
 
 
 const Sidebar = () => {
@@ -25,7 +25,7 @@ const currentPath = paths[2]
                             <span className="relative"> 
                             {item.Icon}
                             </span>  
-                            <span className="relative">{item.name}</span>
+                            <span className="relative animate-fade-in ">{item.name}</span>
                             </Link>)
                     }
                 )

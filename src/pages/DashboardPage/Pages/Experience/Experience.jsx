@@ -1,16 +1,20 @@
-import PagesLayout from "../../layouts/PagesLayout"
+import { useNavigate } from 'react-router-dom'
+import PagesLayout from '../../layouts/PagesLayout'
 
 
 const Experience = () => {
-  return (
-    <PagesLayout>
-      <span>
-        Experience Here
+    const navigate = useNavigate()
+    return (
+        <div>
+          
+            <PagesLayout headerText='Experience'
+                buttonText='Add New' onClick={()=> navigate("/dashboard/experience/add-experience")}
+                children='' />
+            
+            <span>Experience list here</span>
 
-      </span>
-    </PagesLayout>
-
-  )
+        </div>
+    )
 }
 
 export default Experience
