@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { MailIcon, LockClosedIcon } from "@heroicons/react/outline";
 import { useForm } from "react-hook-form";
 import { apiLogin } from "../services/auth";
+import { ColorRing } from "react-loader-spinner";
+import { toast } from "react-toastify";
+
 
 const SignIn = () => {
   // let  isSubmitting = false
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate()
- 
+
 
   const {
     register,
@@ -27,11 +30,15 @@ const SignIn = () => {
         password: data.password,
       });
       console.log("Response:", res.data);
-      console.log("Second: I got called");
-      // redirect user to dashboard
-      navigate("/dashboard")
+      toast.success(res.data)
+      setTimeout(() => {
+        // redirect user to dashboard
+      navigate("/dashboard");
+      }, 5000)
+      
     } catch (error) {
       console.log(error);
+      toast.error(error)
     } finally {
       setIsSubmitting(false);
     }
@@ -116,7 +123,15 @@ const SignIn = () => {
               type="submit"
               className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg"
             >
-              {isSubmitting ? "Loading..." : "Login"}
+              {isSubmitting ? <ColorRing
+                visible={true}
+                height="40"
+                width="40"
+                ariaLabel="color-ring-loading"
+                wrapperStyle={{}}
+                wrapperClass="color-ring-wrapper"
+                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+              /> : "Login"}
             </button>
           </div>
         </form>

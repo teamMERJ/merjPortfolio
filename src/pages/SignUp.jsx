@@ -1,18 +1,78 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MailIcon, LockClosedIcon, UserIcon } from "@heroicons/react/outline";
 import { signUpImg } from "../assets";
 import { useForm } from "react-hook-form";
+import { apiCheckUsernameExists, apiSignUp } from "../services/auth";
+import { toast } from "react-toastify";
+import { ColorRing } from "react-loader-spinner";
 
 const SignUp = () => {
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [usernameAvailable, setUserNameAvailable] = useState(false);
+  const [usernameNotAvailable, setUsernameNotAvailable] = useState(false)
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const checkUserName = async (userName) => {
+    try {
+      const res = await apiCheckUsernameExists(userName)
+      console.log(res.data)
+      const user = res.data.user
+      if (user) {
+        setUsernameNotAvailable(true)
+      } else {
+        setUserNameAvailable(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const userNameWatch = watch("userName");
+  console.log(userNameWatch);
+
+  useEffect(() => {
+    if (userNameWatch) {
+      checkUserName(userNameWatch)
+    }
+  }, [userNameWatch])
+
+  const onSubmit = async (data) => {
     console.log(data);
+    setIsSubmitting(true)
+    let payload = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      userName: data.userName,
+      password: data.password,
+      confirmedPassword: data.password,
+      email: data.email,
+    }
+    if (data.otherNames) {
+      payload = { ...payload, otherNames: data.otherNames }
+    }
+    try {
+      const res = await apiSignUp(payload);
+      console.log(res.data);
+      toast.success(res.data)
+      setTimeout(() => {
+        navigate("/signin")
+      }, 5000)
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-primary via-yellow-400 to-orange-400 text-white">
@@ -45,12 +105,12 @@ const SignUp = () => {
                 placeholder="First Name"
                 className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent"
                 {
-                  // register is from the react hook form and you resgister it with the name of the field. If the input is not optional, use required element to specify that that field should be filled. you can add min/mas length
-                  ...register("firstName", {
-                    required: "Your First Name is Required in this Field",
-                    maxLength: 15,
-                    minLength: 2,
-                  })
+                // register is from the react hook form and you resgister it with the name of the field. If the input is not optional, use required element to specify that that field should be filled. you can add min/mas length
+                ...register("firstName", {
+                  required: "Your First Name is Required in this Field",
+                  maxLength: 15,
+                  minLength: 2,
+                })
                 }
               />
               {/*using 'logical and'(&&) to give  conditional error message */}
@@ -136,6 +196,12 @@ const SignUp = () => {
               {errors.userName && (
                 <p className="text-red-500">{errors.userName.message}</p>
               )}
+              {
+                usernameAvailable && <p className="text-green-500">Username is available</p>
+              }
+              {
+                usernameNotAvailable && <p className="text-red-500">Username is already taken</p>
+              }
             </div>
           </div>
           <div className="mb-4">
@@ -183,7 +249,15 @@ const SignUp = () => {
             type="submit"
             className="bg-secondary text-primary px-4 py-2 rounded-full w-full"
           >
-            Create Account
+            {isSubmitting ? <ColorRing
+              visible={true}
+              height="40"
+              width="40"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            /> : "Create Account"}
           </button>
         </form>
 
