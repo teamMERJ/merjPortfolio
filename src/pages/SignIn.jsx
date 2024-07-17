@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { MailIcon, LockClosedIcon } from "@heroicons/react/outline";
 import { useForm } from "react-hook-form";
 import { apiLogin } from "../services/auth";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
+
 
 const SignIn = () => {
   // let  isSubmitting = false
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate()
- 
+
 
   const {
     register,
@@ -27,11 +30,15 @@ const SignIn = () => {
         password: data.password,
       });
       console.log("Response:", res.data);
-      console.log("Second: I got called");
-      // redirect user to dashboard
-      navigate("/dashboard")
+      toast.success(res.data)
+      setTimeout(() => {
+        // redirect user to dashboard
+      navigate("/dashboard");
+      }, 5000)
+      
     } catch (error) {
       console.log(error);
+      toast.error("An error occured")
     } finally {
       setIsSubmitting(false);
     }
@@ -116,7 +123,7 @@ const SignIn = () => {
               type="submit"
               className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg"
             >
-              {isSubmitting ? "Loading..." : "Login"}
+              {isSubmitting ? <Loader /> : "Login"}
             </button>
           </div>
         </form>
