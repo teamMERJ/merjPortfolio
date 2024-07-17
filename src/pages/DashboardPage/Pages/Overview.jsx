@@ -1,11 +1,63 @@
 import { ArrowRightCircleIcon } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {heroImg} from '../../../assets/index'
+import { heroImg } from '../../../assets/index'
+import { apiGetSKills } from '../../../services/skills';
+import { apiGetAchievements } from '../../../services/achievements';
+import { apiGetProjects } from '../../../services/projects';
+import { apiGetVolunteering } from '../../../services/volunteering';
+import { apiGetEducation } from '../../../services/education';
+import { apiGetExperiences } from '../../../services/experiences';
 // Example icon from Heroicons
 
 
 const Overview = () => {
+
+  const [data, setData] = useState({
+    skills: 0,
+    projects: 0,
+    achievements: 0,
+    volunteering: 0,
+    education: 0,
+    experiences: 0,
+  })
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getData = async () => {
+    setIsLoading(true)
+    try {
+      const [totalSkills, totalAchievements, totalProjects, totalVolunteering, totalEducation, totalExperiences] = await Promise.all([
+        apiGetSKills,
+        apiGetAchievements,
+        apiGetProjects,
+        apiGetVolunteering,
+        apiGetEducation,
+        apiGetExperiences,
+      ])
+
+      const newData = {
+        skills: totalSkills.length,
+        projects: totalProjects.length,
+        achievements: totalAchievements.length,
+        volunteering: totalVolunteering.length,
+        education: totalEducation.length,
+        experiences: totalExperiences.length,
+      }
+
+      setData(newData)
+
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // getData()
+  }, [])
+
   const sections = [
     { name: 'Education', count: 12, image: '/path-to-education-image.jpg' },
     { name: 'Skills', count: 30, image: '/path-to-skills-image.jpg' },

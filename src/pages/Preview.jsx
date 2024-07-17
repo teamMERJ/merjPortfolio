@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
-import { FacebookIcon, LinkedinIcon, MailIcon, Phone, PhoneCallIcon, PhoneIcon, TwitchIcon, TwitterIcon } from "lucide-react"
-import { eltonImg, heroBg, heroImg } from "../assets"
+import { FacebookIcon, LinkedinIcon, MailIcon, Phone, PhoneCallIcon, PhoneIcon, TwitterIcon } from "lucide-react"
+import { eltonImg, heroBg, previewHeroImg } from "../assets"
 import aboutImg from "../assets/images/about.jpg"
 import { Link } from "react-router-dom"
 
@@ -57,7 +57,7 @@ const Preview = () => {
                 ease: "easeIn",
                 duration: 1,
               }}
-              src={heroImg} alt="hero image" className="w-full max-w-full max-h-[500px] object-contain" />
+              src={previewHeroImg} alt="hero image" className="w-full max-w-full max-h-[500px] object-contain" />
           </div>
         </div>
       </div>
