@@ -5,13 +5,15 @@ import { signUpImg } from "../assets";
 import { useForm } from "react-hook-form";
 import { apiCheckUsernameExists, apiSignUp } from "../services/auth";
 import { toast } from "react-toastify";
-import { ColorRing } from "react-loader-spinner";
+import Loader from "../components/Loader";
+import { debounce } from "lodash";
 
 const SignUp = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [usernameAvailable, setUserNameAvailable] = useState(false);
   const [usernameNotAvailable, setUsernameNotAvailable] = useState(false)
+  const [isUsernameLoading, setIsUsernameLoading] = useState(false)
   const navigate = useNavigate()
 
   const {
@@ -22,27 +24,43 @@ const SignUp = () => {
   } = useForm();
 
   const checkUserName = async (userName) => {
+    setIsUsernameLoading(true)
+
     try {
       const res = await apiCheckUsernameExists(userName)
       console.log(res.data)
       const user = res.data.user
       if (user) {
         setUsernameNotAvailable(true)
+        setUserNameAvailable(false)
       } else {
         setUserNameAvailable(true)
+        setUsernameNotAvailable(false)
       }
     } catch (error) {
       console.log(error)
+      toast.error("An error occured")
+    } finally {
+      setIsUsernameLoading(false);
     }
   };
 
+
   const userNameWatch = watch("userName");
-  console.log(userNameWatch);
 
   useEffect(() => {
-    if (userNameWatch) {
-      checkUserName(userNameWatch)
+    const debouncedSearch = debounce(async () => {
+      if (userNameWatch) {
+       await checkUserName(userNameWatch)
+      }
+    }, 1000)
+
+    debouncedSearch();
+
+    return () => {
+      debouncedSearch.cancel();
     }
+
   }, [userNameWatch])
 
   const onSubmit = async (data) => {
@@ -69,7 +87,7 @@ const SignUp = () => {
 
     } catch (error) {
       console.log(error);
-      toast.error(error.message)
+      toast.error("An error occured")
     } finally {
       setIsSubmitting(false);
     }
@@ -196,12 +214,15 @@ const SignUp = () => {
               {errors.userName && (
                 <p className="text-red-500">{errors.userName.message}</p>
               )}
-              {
-                usernameAvailable && <p className="text-green-500">Username is available</p>
-              }
-              {
-                usernameNotAvailable && <p className="text-red-500">Username is already taken</p>
-              }
+              <div className="flex items-center gap-x-2">
+                {isUsernameLoading && <Loader />}
+                {
+                  usernameAvailable && <p className="text-green-500">Username is available</p>
+                }
+                {
+                  usernameNotAvailable && <p className="text-red-500">Username is already taken</p>
+                }
+              </div>
             </div>
           </div>
           <div className="mb-4">
@@ -249,15 +270,7 @@ const SignUp = () => {
             type="submit"
             className="bg-secondary text-primary px-4 py-2 rounded-full w-full"
           >
-            {isSubmitting ? <ColorRing
-              visible={true}
-              height="40"
-              width="40"
-              ariaLabel="color-ring-loading"
-              wrapperStyle={{}}
-              wrapperClass="color-ring-wrapper"
-              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-            /> : "Create Account"}
+            {isSubmitting ? <Loader /> : "Create Account"}
           </button>
         </form>
 

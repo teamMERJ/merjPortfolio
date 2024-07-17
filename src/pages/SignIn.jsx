@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { MailIcon, LockClosedIcon } from "@heroicons/react/outline";
 import { useForm } from "react-hook-form";
 import { apiLogin } from "../services/auth";
-import { ColorRing } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 
 const SignIn = () => {
@@ -38,7 +38,7 @@ const SignIn = () => {
       
     } catch (error) {
       console.log(error);
-      toast.error(error)
+      toast.error("An error occured")
     } finally {
       setIsSubmitting(false);
     }
@@ -123,15 +123,7 @@ const SignIn = () => {
               type="submit"
               className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg"
             >
-              {isSubmitting ? <ColorRing
-                visible={true}
-                height="40"
-                width="40"
-                ariaLabel="color-ring-loading"
-                wrapperStyle={{}}
-                wrapperClass="color-ring-wrapper"
-                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-              /> : "Login"}
+              {isSubmitting ? <Loader /> : "Login"}
             </button>
           </div>
         </form>
