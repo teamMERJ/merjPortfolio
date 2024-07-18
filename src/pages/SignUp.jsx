@@ -268,7 +268,7 @@ const SignUp = () => {
           </div>
           <button
             type="submit"
-            className="bg-secondary text-primary px-4 py-2 rounded-full w-full"
+            className="bg-secondary text-primary px-4 py-2 rounded-full w-full flex justify-center items-center"
           >
             {isSubmitting ? <Loader /> : "Create Account"}
           </button>

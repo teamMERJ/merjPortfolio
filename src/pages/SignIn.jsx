@@ -123,7 +123,7 @@ const SignIn = () => {
           <div>
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg"
+              className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg flex justify-center items-center"
             >
               {isSubmitting ? <Loader /> : "Login"}
             </button>
