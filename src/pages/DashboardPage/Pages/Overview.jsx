@@ -1,11 +1,68 @@
 import { ArrowRightCircleIcon } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {heroImg} from '../../../assets/index'
+import { heroImg } from '../../../assets/index'
+import { apiGetSKills } from '../../../services/skills';
+import { apiGetAchievements } from '../../../services/achievements';
+import { apiGetProjects } from '../../../services/projects';
+import { apiGetVolunteering } from '../../../services/volunteering';
+import { apiGetEducation } from '../../../services/education';
+import { apiGetExperiences } from '../../../services/experiences';
+import PageLoader from '../../../components/PageLoader';
 // Example icon from Heroicons
 
 
 const Overview = () => {
+
+  const [data, setData] = useState({
+    skills: 0,
+    projects: 0,
+    achievements: 0,
+    volunteering: 0,
+    education: 0,
+    experiences: 0,
+  })
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getData = async () => {
+    setIsLoading(true)
+    try {
+      const [totalSkills, totalAchievements, totalProjects, totalVolunteering, totalEducation, totalExperiences] = await Promise.all([
+        apiGetSKills(),
+        apiGetAchievements(),
+        apiGetProjects(),
+        apiGetVolunteering(),
+        apiGetEducation(),
+        apiGetExperiences(),
+      ])
+
+      console.log("Total skills: ", totalSkills)
+
+      const newData = {
+        skills: totalSkills.length,
+        projects: totalProjects.length,
+        achievements: totalAchievements.length,
+        volunteering: totalVolunteering.length,
+        education: totalEducation.length,
+        experiences: totalExperiences.length,
+      }
+
+      console.log(newData)
+
+      setData(newData)
+
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   const sections = [
     { name: 'Education', count: 12, image: '/path-to-education-image.jpg' },
     { name: 'Skills', count: 30, image: '/path-to-skills-image.jpg' },
@@ -16,34 +73,39 @@ const Overview = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-primary text-primay">
+    <>
+    {
+      isLoading ? (
+        <PageLoader/>
+      ) : (
+        <div className="min-h-screen text-white">
       {/* Hero Section */}
       <div className="relative">
         <img src={heroImg} alt="Hero" className="w-full h-64 object-cover" />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white animate-fade-in  animate-bounce">Welcome to Your Dashboard</h1>
+          <h1 className="text-4xl font-bold text-white animate-fade-in">Welcome to Your Dashboard</h1>
         </div>
       </div>
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-40 py-10">
         {sections.map((section, index) => (
           <Link to={`/${section.name.toLowerCase()}`} key={index} className="group">
-            <div className={`bg-${index % 2 === 0 ? 'white' : 'secondary'} p-4 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:scale-105`}>
-              <div className="relative mb-4">
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white rounded-full w-16 h-16">
-                  <img src={section.image} alt={section.name} className="w-full h-full rounded-full object-cover" />
-                </div>
-              </div>
-              <div className="pt-8 text-center">
-                <h2 className="text-xl font-semibold ">{section.name}</h2>
-                <p className="text-lg">{section.count} {section.name}</p>
-                <ArrowRightCircleIcon className="h-6 w-6 mx-auto mt-2 text-white group-hover:text-orange-600" />
+            <div className="bg-[#ecb2708e] p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:scale-105">
+              
+              <div className="pt-2 text-center">
+                <h2 className="text-xl font-semibold">{section.name}</h2>
+                <p className="text-lg text-black">{section.count} {section.name}</p>
+                
               </div>
             </div>
           </Link>
         ))}
       </div>
     </div>
+      )
+        
+    }
+    </>
   );
 };
 

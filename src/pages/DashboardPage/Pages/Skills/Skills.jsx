@@ -1,74 +1,83 @@
-import React from "react";
-import SkillCard from "./SkillsCard";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PagesLayout from "../../layouts/PagesLayout";
+import K from "../../../../konstants";
+import { Edit, TrashIcon } from "lucide-react";
+import { apiDeleteSkill, apiGetSKills } from "../../../../services/skills";
+import PageLoader from "../../../../components/PageLoader";
+import { toast } from "react-toastify";
+import Loader from "../../../../components/Loader";
 
-// Example skills data
-const skills = [
-  {
-    name: "HTML",
-    levelOfProficiency: "expert",
-    logo: "path-to-html-logo.png",
-  },
-  {
-    name: "CSS",
-    levelOfProficiency: "expert",
-    logo: "path-to-css-logo.png",
-  },
-  {
-    name: "JavaScript",
-    levelOfProficiency: "advanced",
-    logo: "path-to-javascript-logo.png",
-  },
-  {
-    name: "React",
-    levelOfProficiency: "advanced",
-    logo: "path-to-react-logo.png",
-  },
-  {
-    name: "Node.js",
-    levelOfProficiency: "intermediate",
-    logo: "path-to-nodejs-logo.png",
-  },
-  {
-    name: "Express",
-    levelOfProficiency: "intermediate",
-    logo: "path-to-express-logo.png",
-  },
-  {
-    name: "MongoDB",
-    levelOfProficiency: "intermediate",
-    logo: "path-to-mongodb-logo.png",
-  },
-  {
-    name: "Git",
-    levelOfProficiency: "advanced",
-    logo: "path-to-git-logo.png",
-  },
-  {
-    name: "TypeScript",
-    levelOfProficiency: "advanced",
-    logo: "path-to-typescript-logo.png",
-  },
-];
+const Skills = () => {
+  const navigate = useNavigate()
+  const [skills, setSkills] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
-const SkillsPage = () => {
+  const fetchSkills = async () => {
+    setIsLoading(true)
+    try {
+      const res = await apiGetSKills()
+      console.log(res.data)
+      setSkills(res.data.Skills)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleDelete = async (_id) => {
+    try {
+      console.log(_id)
+      const res = await apiDeleteSkill(_id)
+      console.log(res.data)
+      toast.success(res.data.message)
+    } catch (error) {
+      console.log(error)
+      toast.error("An error occured")
+    }
+  }
+
+  useEffect(() => {
+    fetchSkills()
+  }, [])
   return (
-    <div className="min-h-screen bg-primary text-white p-8">
-      <div className="max-w-6xl mx-auto bg-white text-black p-6 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-6">Skills</h1>
-        <div className="grid grid-cols-3 gap-6">
-          <div className="col-span-2 row-span-2">
-            <SkillCard skill={skills[0]} />
+    <PagesLayout headerText="Skills" buttonText="Add New skill" onClick={() => navigate("/dashboard/skills/add")} >
+      {
+        isLoading ? <PageLoader /> :
+
+        <div className="mt-6">
+        {skills.length === 0 ? (
+          <p className="text-center text-gray-500">No skills added yet</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+            {skills.map(({ name, levelOfProficiency, id }, index) => (
+              <div key={index} className="bg-white h-40 shadow-md rounded-xl flex flex-col p-5 relative hover:shadow-lg transition-shadow duration-300 bg-[#ecb2708e]">
+                <div className="absolute top-2 right-2 flex gap-x-2">
+                  <button className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark transition-colors duration-300">
+                    <Edit />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(id)}
+                    className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark transition-colors duration-300 flex justify-center items-center"
+                  >
+                    {isDeleting ? <Loader /> : <TrashIcon />}
+                  </button>
+                </div>
+                <div className="flex-1 flex flex-col justify-center">
+                  <span className="text-lg font-semibold">{name}</span>
+                  <span className="text-sm text-gray-500">{levelOfProficiency}</span>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="row-span-3">
-            <SkillCard skill={skills[1]} />
-          </div>
-          {skills.slice(2).map((skill, index) => (
-            <SkillCard key={index} skill={skill} />
-          ))}
-        </div>
+        )}
       </div>
-    </div>
+      }
+
+    </PagesLayout>
   );
 };
 
-export default SkillsPage;
+export default Skills

@@ -30,7 +30,9 @@ const SignIn = () => {
         password: data.password,
       });
       console.log("Response:", res.data);
-      toast.success(res.data)
+      //set access token in local storage
+      localStorage.setItem("accessToken", res.data.accessToken)
+      toast.success(res.data.message)
       setTimeout(() => {
         // redirect user to dashboard
       navigate("/dashboard");
@@ -121,7 +123,7 @@ const SignIn = () => {
           <div>
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg"
+              className="w-full py-2 px-4 bg-secondary hover:bg-secondary-dark text-primary font-semibold rounded-lg flex justify-center items-center"
             >
               {isSubmitting ? <Loader /> : "Login"}
             </button>
