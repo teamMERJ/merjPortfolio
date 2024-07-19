@@ -25,7 +25,7 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Landing />,
+      element: <SignUp />,
     },
     {
       path: "preview",
@@ -36,8 +36,8 @@ const App = () => {
       element: <SignIn />,
     },
     {
-      path: "signup",
-      element: <SignUp />
+      path: "landing",
+      element: <Landing />
     },
     {
       path: "dashboard",

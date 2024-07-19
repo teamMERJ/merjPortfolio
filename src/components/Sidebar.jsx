@@ -9,7 +9,9 @@ const currentPath = paths[2]
 
     return (
         <>
-        <div className="flex flex-row justify-center gap-x-4 h-screen  border-r ml-3 text-primary font-semibold text-xl">
+        <div className="flex flex-row justify-center gap-x-4 h-screen  border-r ml-3 text-primary font-semibold text-xl bg-slate-100">
+            
+    
             <div className=" flex flex-col mt-40 content-center ">
                 <div className="">
                 </div>

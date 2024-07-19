@@ -53,7 +53,7 @@ const Skills = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
             {skills.map(({ name, levelOfProficiency, id }, index) => (
-              <div key={index} className="bg-white h-40 shadow-md rounded-xl flex flex-col p-5 relative hover:shadow-lg transition-shadow duration-300 bg-[#ecb2708e]">
+              <div key={index} className="h-40 shadow-md rounded-xl flex flex-col p-5 relative hover:shadow-lg transition-shadow duration-300 bg-[#ecb2708e]">
                 <div className="absolute top-2 right-2 flex gap-x-2">
                   <button className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark transition-colors duration-300">
                     <Edit />

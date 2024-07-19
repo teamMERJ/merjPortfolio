@@ -46,7 +46,7 @@ const SignIn = () => {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-primary via-yellow-400 to-primary">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black via-yellow-400 to-black text-white">
       <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg shadow-lg p-10 w-full max-w-md">
         <h2 className="text-2xl font-semibold text-white text-center mb-6">
           Login
@@ -54,7 +54,7 @@ const SignIn = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-primary mb-2" htmlFor="email">
+            <label className=" text-white block mb-2" htmlFor="email">
               Email ID
             </label>
             <div className="relative">
@@ -62,7 +62,7 @@ const SignIn = () => {
               <input
                 type="email"
                 id="email"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 rounded-lg border text-black border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent"
                 placeholder="Email ID"
                 {...register("email", {
                   required: "Your Email is Required in this Field",
@@ -75,7 +75,7 @@ const SignIn = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-primary mb-2" htmlFor="password">
+            <label className="block text-white mb-2" htmlFor="password">
               Password
             </label>
             <div className="relative">
@@ -114,7 +114,7 @@ const SignIn = () => {
             <div className="text-sm">
               <Link
                 to="/forgot-password"
-                className="font-medium text-primary hover:text-secondary-light"
+                className="font-medium text-white hover:text-secondary-light"
               >
                 Forgot Password?
               </Link>

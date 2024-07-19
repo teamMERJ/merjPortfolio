@@ -12,9 +12,9 @@ const Education = () => {
         {K.EDUCATION.map(({ schoolName, program, qualification, startDate, endDate }, index) => (
           <div
             key={index}
-            className="bg-white shadow-md rounded-xl flex flex-col p-5 space-y-2 hover:shadow-lg transition-shadow bg-[#ecb2708e]"
+            className="bg-[#ecb2708e] shadow-md rounded-xl flex flex-col p-5 space-y-2 hover:shadow-lg transition-shadow"
           >
-            <div className="ml-auto flex gap-2">
+            <div className="ml-auto flex gap-2 ">
               <button className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark transition-colors">
                 <Edit className="h-5 w-5" />
               </button>

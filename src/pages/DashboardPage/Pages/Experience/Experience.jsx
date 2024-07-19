@@ -11,11 +11,11 @@ const Experience = () => {
       buttonText="Add new Experience"
       onClick={() => navigate("/dashboard/experience/add")}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 ">
         {K.EXPERIENCES.map(({companyName, location, role, skills, responsibility, startDate, endDate }, index) => (
           <div
             key={index}
-            className="shadow-md rounded-xl p-5 bg-gray-200 text-black flex flex-col justify-between bg-[#ecb2708e]"
+            className="shadow-md rounded-xl p-5 text-black flex flex-col justify-between bg-[#ecb2708e]"
           >
             <div className="flex justify-between items-center ">
               <span className="uppercase font-bold">{companyName}</span>

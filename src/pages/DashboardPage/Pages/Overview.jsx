@@ -93,13 +93,18 @@ const Overview = () => {
             <div className="bg-[#ecb2708e] p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:scale-105">
               
               <div className="pt-2 text-center">
-                <h2 className="text-xl font-semibold">{section.name}</h2>
-                <p className="text-lg text-black">{section.count} {section.name}</p>
+                <h2 className="text-2xl text-black font-semibold">{section.name}</h2>
+                <p className="text-lg text-black pt-4">{section.count} </p>
                 
               </div>
             </div>
           </Link>
         ))}
+      </div>
+      <div className='flex items-center justify-center mb-4'>
+        <Link to="/preview"><button 
+        className="h-10 w-40 px-3 py-2 bg-primary text-white font-bold border-2 rounded-3xl hover:bg-secondary"
+        >Preview Page</button></Link>
       </div>
     </div>
       )

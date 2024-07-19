@@ -104,7 +104,7 @@ const SignUp = () => {
 
       <div className="flex flex-col justify-center w-full md:w-1/2 p-8 bg-primary text-secondary">
         <h1 className="text-3xl font-bold mb-6 text-center">
-          Sign Up with merjPortfolio
+          Sign Up with merjFOLIO
         </h1>
 
         <form

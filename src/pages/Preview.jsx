@@ -49,7 +49,7 @@ const Preview = () => {
           <div className="md:w-1/2 p-8">
             <motion.img
               initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+              whileInView={{ x: 0, opacity: 1 }}
               transition={{
                 delay: 0.2,
                 x: { type: "spring", stiffness: 60 },
@@ -75,7 +75,7 @@ const Preview = () => {
           <motion.div
             className="md:w-1/2 p-8"
             initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
+            whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
             <img src={aboutImg} alt="profile img" className="w-full max-w-full max-h-[400px] object-contain" />
@@ -92,14 +92,14 @@ const Preview = () => {
               duration: 1,
             }}
           >
-            <h2 className="text-3xl mb-2 font-semibold">Hi There! I'm Elton Asamoah</h2>
+            <h2 className="text-3xl mb-2 font-semibold">Hi There! I'm Cris Ntiamoah</h2>
             <h3 className="text-yellow text-2xl font-semibold mb-4">Web Developer</h3>
             <p className="text-lg mb-4 font-light">
               I am a Web Developer with a strong focus on front end development. My designs seeks to attract, inspire, create desires and motivate people to respond to messages, with a view to making a favorable impact.
             </p>
             <ul className="mb-4 text-lg leading-8 font-light">
               <li>Phone: +233 242 084 838</li>
-              <li>Email: eltonkel@gmail.com</li>
+              <li>Email: chris@gmail.com</li>
               <li>Location: Ghana</li>
               <li>Language: English</li>
               <li>Freelance: Available</li>
