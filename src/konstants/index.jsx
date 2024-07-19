@@ -97,6 +97,62 @@ import { Award, AwardIcon, BookText, BookTextIcon, BriefcaseBusiness, BriefcaseB
             name:"React",
             levelOfProciency: "Beginner",
         },
+    ],
+
+    EDUCATION: [
+        {
+            schoolName:"University of Ghana",
+            location: "Ghana",
+            program: "Engineering",
+            qualification: "Masters",
+            startDate: "2020",
+            endDate: "2022",
+        },
+        {
+            schoolName:"Oxforf University",
+            location: "Ghana",
+            program: "Engineering",
+            qualification: "Masters",
+            startDate: "2020",
+            endDate: "2022",
+        },
+       
+    ],
+
+    PROJECTS: [
+        {
+            projectName:"MERJ EVENTS",
+            description: "An ultramodern event listing website",
+            contributors: "Team MERJ",
+            skills: "React",
+            link: "https://merjevents.netlify.app/",
+            nameOfInstitution: "MEST",
+            startDate: "2024",
+            endDate: "2024",
+        },
+       
+    ],
+
+    EXPERIENCES: [
+        {
+            companyName:"MEST",
+            location: "Accra, Ghana",
+            role: "Tutor",
+            skills: "React",
+            responsibility: "frontend tutoring",
+            startDate: "2024",
+            endDate: "2024",
+        },
+        {
+            companyName:"MEST",
+            location: "Accra, Ghana",
+            role: "Tutor",
+            skills: "React",
+            responsibility: "frontend tutoring",
+            startDate: "2024",
+            endDate: "2024",
+        },
+       
     ]
 
 

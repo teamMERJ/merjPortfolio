@@ -1,13 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import PagesLayout from '../../layouts/PagesLayout'
+import K from '../../../../konstants'
+import { Edit, TrashIcon } from 'lucide-react' 
 
 
 const Projects = () => {
     const navigate = useNavigate()
     return (
         <PagesLayout headerText="Projects" buttonText="Add Project" onClick={() =>navigate ("/dashboard/projects/add")}>
-          <div className="grid grid-cols-1 gap-5 mt-5">
-          {K.PROJECTS.map(({name, description, contributors, institution, startDate, endDate}, index) =>
+          <div className="grid grid-cols-1 gap-5 mt-5 bg-[#ecb2708e] ">
+          {K.PROJECTS.map(({projectName, description, contributors, skills, link, nameOfInstitution, startDate, endDate}, index) =>
           <div
           key={index} 
           className="h-54 shadow-md rounded-xl flex flex-col p-5"
@@ -20,10 +22,12 @@ const Projects = () => {
                 <TrashIcon/>
               </span>
             </div>
-            <span className="uppercase font-bold ">{name}</span>
+            <span className="uppercase font-bold ">{projectName}</span>
             <span>{description}</span>
             <span>{contributors}</span>
-            <span>{institution}</span>
+            <span>{skills}</span>
+            <span>{link}</span>
+            <span>{nameOfInstitution}</span>
             <span>{startDate}</span>
             <span>{endDate}</span>
           </div>

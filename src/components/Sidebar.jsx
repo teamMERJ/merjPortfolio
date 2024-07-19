@@ -9,8 +9,8 @@ const currentPath = paths[2]
 
     return (
         <>
-        <div className="flex flex-row justify-center gap-x-4 h-screen  border-r ml-3 text-primary">
-            <div className=" flex flex-col justify-center content-center ">
+        <div className="flex flex-row justify-center gap-x-4 h-screen  border-r ml-3 text-primary font-semibold text-xl">
+            <div className=" flex flex-col mt-40 content-center ">
                 <div className="">
                 </div>
                 <div className=" flex flex-col justify-center items-center gap-y-3  w-[240px]">
@@ -22,7 +22,7 @@ const currentPath = paths[2]
                         
                         ${ currentPath == item.path && "bg-primary text-white rounded-l-[20px]" }` }>
                             
-                            <span className="relative"> 
+                            <span className="relative "> 
                             {item.Icon}
                             </span>  
                             <span className="relative animate-fade-in ">{item.name}</span>

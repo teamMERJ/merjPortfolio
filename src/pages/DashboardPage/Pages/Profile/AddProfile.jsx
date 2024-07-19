@@ -3,7 +3,7 @@ import { CameraIcon, DownloadIcon, GlobeIcon, MailIcon, PhoneIcon, UserIcon } fr
 
 const AddProfile = () => {
   return (
-    <div className="min-h-screen bg-primary text-white p-8">
+    <div className="min-h-screen text-white p-8">
       <div className="max-w-3xl mx-auto bg-white text-black p-6 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-center">Create New Profile</h1>
 
@@ -167,9 +167,7 @@ const AddProfile = () => {
                 id="cvUpload"
                 className="w-full pl-4 pr-10 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent"
               />
-              <label htmlFor="cvUpload" className="absolute right-0 top-0 p-2 bg-secondary rounded-full cursor-pointer">
-                <DownloadIcon className="h-5 w-5 text-white" />
-              </label>
+              
             </div>
 
             {/* GitHub Link */}

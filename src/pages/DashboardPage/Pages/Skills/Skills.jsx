@@ -47,34 +47,33 @@ const Skills = () => {
       {
         isLoading ? <PageLoader /> :
 
-          <div>
-            {
-              skills.length == 0 ? <p>No skill added yet</p> : <div className="grid grid-cols-4 gap-6 mt-10">
-                {skills.map(({ name, levelOfProficiency, id }, index) => (
-                  <div
-                    key={index}
-                    className="h-40 shadow-md rounded-xl flex flex-col p-5">
-                    <div className="ml-auto flex gap-x-2">
-                      <button className="bg-primary p-2 rounded-full text-white">
-                        <Edit />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(id)}
-                        className="bg-primary p-2 rounded-full text-white flex justify-center items-center">
-                        {
-                          isDeleting ? <Loader /> : <TrashIcon />
-                        }
-                      </button>
-                    </div>
-                    <span>{name}</span>
-                    <span>{levelOfProficiency}</span>
-                  </div>
-                )
-
-                )}
+        <div className="mt-6">
+        {skills.length === 0 ? (
+          <p className="text-center text-gray-500">No skills added yet</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+            {skills.map(({ name, levelOfProficiency, id }, index) => (
+              <div key={index} className="bg-white h-40 shadow-md rounded-xl flex flex-col p-5 relative hover:shadow-lg transition-shadow duration-300 bg-[#ecb2708e]">
+                <div className="absolute top-2 right-2 flex gap-x-2">
+                  <button className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark transition-colors duration-300">
+                    <Edit />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(id)}
+                    className="bg-primary p-2 rounded-full text-white hover:bg-primary-dark transition-colors duration-300 flex justify-center items-center"
+                  >
+                    {isDeleting ? <Loader /> : <TrashIcon />}
+                  </button>
+                </div>
+                <div className="flex-1 flex flex-col justify-center">
+                  <span className="text-lg font-semibold">{name}</span>
+                  <span className="text-sm text-gray-500">{levelOfProficiency}</span>
+                </div>
               </div>
-            }
+            ))}
           </div>
+        )}
+      </div>
       }
 
     </PagesLayout>

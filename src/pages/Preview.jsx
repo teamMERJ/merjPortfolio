@@ -10,7 +10,7 @@ const Preview = () => {
     <div>
       <div className="bg-black flex flex-col md:flex-row text-white justify-between items-center px-10 py-6 w-full">
         <div className="mb-4 md:mb-0">
-          <h4 className="text-white">merjFOLIO</h4>
+          <h4 className="text-yellow font-bold">merj<span className="text-white">FOLIO</span></h4>
         </div>
         <div className="font-semibold text-lg flex flex-col md:flex-row gap-4 md:gap-8 items-center ">
           <span className="text-yellow">HOME</span>
@@ -125,7 +125,7 @@ const Preview = () => {
           >SKILLS</motion.h2>
           <motion.div className="flex flex-col md:flex-row justify-between"
             initial={{ y: 100, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{
               delay: 0.4,
               x: { type: "spring", stiffness: 60 },
@@ -230,8 +230,18 @@ const Preview = () => {
         </div>
       </div>
 
-
-      <div className="bg-[#0A101E] text-white py-16">
+{/* Achievements */}
+      <motion.div className="bg-[#0A101E] text-white py-16"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        delay: 0.4,
+        x: { type: "spring", stiffness: 60 },
+        opacity: { duration: 0.2 },
+        ease: "easeIn",
+        duration: 1,
+      }}
+      >
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <h2 className="text-center text-3xl underline-offset-4 mb-8 text-yellow font-bold">ACHIEVEMENTS</h2>
           <div className="space-y-8">
@@ -263,9 +273,20 @@ const Preview = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="bg-[#0A101E] text-white py-16">
+{/* Projects */}
+      <motion.div className="bg-[#0A101E] text-white py-16"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        delay: 0.4,
+        x: { type: "spring", stiffness: 60 },
+        opacity: { duration: 0.2 },
+        ease: "easeIn",
+        duration: 1,
+      }}
+      >
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <h2 className="text-yellow text-center text-3xl font-bold mb-8">PROJECTS</h2>
 
@@ -274,31 +295,32 @@ const Preview = () => {
 
               <img src="" alt="Wedding img" className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-4">
-                <h2 className="text-xl font-semibold text-black">Wedding Website</h2>
-                <p className="text-gray-600">Client Project</p>
+                <h2 className="text-xl font-semibold text-yellow">Event Listing Website</h2>
+                <p className="text-gray-400">Client Project</p>
               </div>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4">
+            <div className="bg-gray-800 shadow-md rounded-lg p-4">
               <img src="/path-to-image2.jpg" alt="2D Vinyl Design" className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-4">
-                <h2 className="text-xl font-semibold text-black">Hotel Website</h2>
-                <p className="text-gray-600">Client Project</p>
+                <h2 className="text-xl font-semibold text-yellow">Hotel Website</h2>
+                <p className="text-gray-400">Client Project</p>
               </div>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4">
+            <div className="bg-gray-800 shadow-md rounded-lg p-4">
               <img src="/path-to-image3.jpg" alt="Creative Poster Design" className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-4">
-                <h2 className="text-xl font-semibold text-black">Travel Website</h2>
-                <p className="text-gray-600">Client Project</p>
+                <h2 className="text-xl font-semibold text-yellow">Travel Website</h2>
+                <p className="text-gray-400">Client Project</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
+{/* Contact */}
       <div className="bg-[#0A101E] text-white py-16">
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
-          <h2 className="text-yellow text-center text-3xl font-bold mb-8">Contact</h2>
+          <h2 className="text-yellow text-center text-3xl font-bold mb-8">CONTACT</h2>
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 p-4">
               <h3 className="text-2xl font-bold mb-4">Just say Hello</h3>
