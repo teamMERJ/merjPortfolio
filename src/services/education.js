@@ -9,14 +9,14 @@ export const apiGetEducation = async () => {
     return apiClient.get("/education")
 }
 
-export const apiGetEducationById = async () => {
+export const apiGetEducationById = async (id) => {
     return apiClient.get(`/education/${id}`)
 }
 
-export const apiUpdateEducation = async () => {
-    return apiClient.patch(`/education/${id}`)
+export const apiUpdateEducation = async (id, payload) => {
+    return apiClient.patch(`/education/${id}`, payload)
 }
 
-export const apiDeleteEducation = async () => {
+export const apiDeleteEducation = async (id) => {
     return apiClient.delete(`/education/${id}`)
 }

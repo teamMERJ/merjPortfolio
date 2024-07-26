@@ -19,25 +19,28 @@ import Education from "./pages/DashboardPage/Pages/Education/Education"
 import Profile from "./pages/DashboardPage/Pages/Profile/Profile"
 import Achievements from "./pages/DashboardPage/Pages/Achievements/Achievements"
 import Volunteering from "./pages/DashboardPage/Pages/Volunteering/Volunteering"
-
+import AuthLayout from "./pages/AuthLayout"
+import { apiGetUserDetails } from "./services/preview"
+import { toast } from "react-toastify"
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <SignUp />,
-    },
-    {
-      path: "preview",
-      element: <Preview />,
-    },
-    {
-      path: "signin",
-      element: <SignIn />,
-    },
-    {
-      path: "landing",
       element: <Landing />
+    },
+    {
+      element: <AuthLayout />,
+      children: [
+        {
+          path: "signin",
+          element: <SignIn />,
+        },
+        {
+          path: "signup",
+          element: <SignUp />,
+        },
+      ],
     },
     {
       path: "dashboard",
@@ -102,8 +105,26 @@ const App = () => {
         {
           path: "voluntering/add",
           element: <AddVolunteering />
+        },
+        {
+          
         }
       ],
+    },
+    {
+      path: "preview",
+      element: <Preview />,
+      loader: async ({ params }) => {
+        const username = params.username;
+        try {
+          const response = await apiGetUserDetails(username);
+          const userProfileData = response?.data.user;
+          return userProfileData;
+        } catch (error) {
+          toast.error("An error occured");
+          return null;
+        }
+      }
     },
     
   ])

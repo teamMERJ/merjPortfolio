@@ -3,8 +3,42 @@ import { FacebookIcon, LinkedinIcon, MailIcon, Phone, PhoneCallIcon, PhoneIcon, 
 import { eltonImg, heroBg, previewHeroImg } from "../assets"
 import aboutImg from "../assets/images/about.jpg"
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { apiGetUserDetails } from "../services/preview"
 
 const Preview = () => {
+  const [user, setUser] = useState(null); //initialize state to null
+  const [loading, setLoading] = useState(true); //Initialize loading state to true
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true); //Start loading
+        const response = await apiGetUserDetails("MikeB");        //Replace with your API endpoint
+        console.log('response', response.data.user)
+        setUser(response.data.user)
+      } catch (error) {
+        console.error('Error fetching data', error);
+
+      } finally {
+        setLoading(false); //End loading
+      }
+    };
+
+    fetchData();
+  }, []); //Empty dependency array to run only once on mount
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // console.log('responsefgtf', user.experience[0].companyName)
+  // user.experience.map((key, item) => {
+  //   console.log('iuuu', key)
+  // })
+
   return (
 
     <div>
@@ -29,7 +63,7 @@ const Preview = () => {
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-center h-full px-4 md:px-28 pt-16 md:pt-0">
           <motion.div className="text-white text-center md:text-left px-8 md:px-10 lg:px-20 md:w-1/2"
             initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            animate={{ x: 0, opacity: 1 }}
             transition={{
               delay: 0.2,
               x: { type: "spring", stiffness: 60 },
@@ -39,8 +73,8 @@ const Preview = () => {
             }}
           >
             <h1 className="text-yellow text-3xl lg:text-4xl mb-2">Hello, I'm</h1>
-            <h2 className="text-4xl lg:text-6xl xl:text-8xl font-bold mb-4">Chris <br /> Ntiamoah</h2>
-            <h3 className="text-2xl lg:text-3xl mb-4">Web Developer</h3>
+            <h2 className="text-4xl lg:text-6xl xl:text-8xl font-bold mb-4">{user.firstName} <br /> {user.lastName}</h2>
+            <h3 className="text-2xl lg:text-3xl mb-4">{user.userProfile.bio}</h3>
             <motion.button className="bg-yellow text-black font-semibold px-10 py-3 rounded-full"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -49,7 +83,7 @@ const Preview = () => {
           <div className="md:w-1/2 p-8">
             <motion.img
               initial={{ x: 100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
+              animate={{ x: 0, opacity: 1 }}
               transition={{
                 delay: 0.2,
                 x: { type: "spring", stiffness: 60 },
@@ -66,7 +100,7 @@ const Preview = () => {
         <motion.h4
           className="text-center text-3xl text-yellow font-bold"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
           PROFILE
@@ -75,7 +109,7 @@ const Preview = () => {
           <motion.div
             className="md:w-1/2 p-8"
             initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 1 }}
           >
             <img src={aboutImg} alt="profile img" className="w-full max-w-full max-h-[400px] object-contain" />
@@ -92,17 +126,17 @@ const Preview = () => {
               duration: 1,
             }}
           >
-            <h2 className="text-3xl mb-2 font-semibold">Hi There! I'm Cris Ntiamoah</h2>
-            <h3 className="text-yellow text-2xl font-semibold mb-4">Web Developer</h3>
+            <h2 className="text-3xl mb-2 font-semibold">{user.firstName}{user.lastName}</h2>
+            <h3 className="text-yellow text-2xl font-semibold mb-4"></h3>
             <p className="text-lg mb-4 font-light">
-              I am a Web Developer with a strong focus on front end development. My designs seeks to attract, inspire, create desires and motivate people to respond to messages, with a view to making a favorable impact.
+              {user.userProfile.about}
             </p>
             <ul className="mb-4 text-lg leading-8 font-light">
-              <li>Phone: +233 242 084 838</li>
+              <li>Phone: <span>{user.userProfile.contact}</span></li>
               <li>Email: chris@gmail.com</li>
-              <li>Location: Ghana</li>
+              <li>Location: <span>{user.userProfile.location}</span></li>
               <li>Language: English</li>
-              <li>Freelance: Available</li>
+              <li>Sex: <span>{user.userProfile.sex}</span></li>
             </ul>
             <div className="flex items-center gap-2 pb-4">
               <span className="text-lg pr-4">Socials:</span>
@@ -136,7 +170,7 @@ const Preview = () => {
           >
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-20"
               initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
+              animate={{ x: 0, opacity: 1 }}
               transition={{
                 delay: 0.2,
                 x: { type: "spring", stiffness: 60 },
@@ -183,64 +217,52 @@ const Preview = () => {
             <div className="md:w-1/2 mb-8 md:mb-0 md:pr-20">
               <h3 className="text-2xl mb-4">Education</h3>
               <ul className="text-lg leading-10 font-light">
-                <li className="mb-8">
-                  <h4 className="text-yellow text-xl font-bold">Master of Computer Science</h4>
-                  <p>2015 - 2016</p>
-                  <p>University of XYZ</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
-                </li>
-                <li className="mb-8">
-                  <h4 className="text-yellow text-xl font-bold">Bachelor of Arts- Economics</h4>
-                  <p>2010 - 2014</p>
-                  <p>University of ABC</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
-                </li>
-                <li className="mb-8">
-                  <h4 className="text-yellow text-xl font-bold">Diploma in Computer Science</h4>
-                  <p>2024 - 2024</p>
-                  <p>MEST</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
-                </li>
+
+                {user.education?.map((item, key ) => (
+                  <li className="mb-2" key={key}>
+                    <h1 className="text-yellow text-xl font-bold">{item.schoolName}</h1>
+                    <h4>{item.qualification}</h4>
+                    <p>{item.startDate} to {item.endDate}</p>
+                    <p>{item.schoolName}</p>
+                    <p>{item.program}</p>
+                    <p>{}</p>
+                  </li>
+                ))}
+
               </ul>
             </div>
+
+                {/* experience section */}
             <div className="md:w-1/2">
               <h3 className="text-2xl mb-4">Experience</h3>
               <ul className="text-lg leading-10 font-light">
-                <li className="mb-8">
-                  <h4 className="text-yellow text-xl font-bold">Jnr Web Developer</h4>
-                  <p>Jan 2020 - Present</p>
-                  <p>Mest Africa</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
-                </li>
-                <li className="mb-8">
-                  <h4 className="text-yellow text-xl font-bold">IT Expert</h4>
-                  <p>Jan 2016 - Dec 2019</p>
-                  <p>Mest Ghana</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
-                </li>
-                <li className="mb-8">
-                  <h4 className="text-yellow text-xl font-bold">Web Designer</h4>
-                  <p>Jan 2014 - Dec 2015</p>
-                  <p>Mest Africa</p>
-                  <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
-                </li>
+                {user.experiences?.map((item, key) => (
+                <li className="mb-8" key={key}>
+                <h4 className="text-yellow text-xl font-bold">{item.companyName}</h4>
+                <p>{item.location}</p>
+                <p>Mest Africa</p>
+                <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula nulla, tincidunt id faucibus sed, suscipit feugiat turpis.</p>
+              </li>
+                ))}
+                
+                
               </ul>
             </div>
           </div>
         </div>
       </div>
 
-{/* Achievements */}
+      {/* Achievements */}
       <motion.div className="bg-[#0A101E] text-white py-16"
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        delay: 0.4,
-        x: { type: "spring", stiffness: 60 },
-        opacity: { duration: 0.2 },
-        ease: "easeIn",
-        duration: 1,
-      }}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          delay: 0.4,
+          x: { type: "spring", stiffness: 60 },
+          opacity: { duration: 0.2 },
+          ease: "easeIn",
+          duration: 1,
+        }}
       >
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <h2 className="text-center text-3xl underline-offset-4 mb-8 text-yellow font-bold">ACHIEVEMENTS</h2>
@@ -275,17 +297,17 @@ const Preview = () => {
         </div>
       </motion.div>
 
-{/* Projects */}
+      {/* Projects */}
       <motion.div className="bg-[#0A101E] text-white py-16"
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        delay: 0.4,
-        x: { type: "spring", stiffness: 60 },
-        opacity: { duration: 0.2 },
-        ease: "easeIn",
-        duration: 1,
-      }}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          delay: 0.4,
+          x: { type: "spring", stiffness: 60 },
+          opacity: { duration: 0.2 },
+          ease: "easeIn",
+          duration: 1,
+        }}
       >
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <h2 className="text-yellow text-center text-3xl font-bold mb-8">PROJECTS</h2>
@@ -317,7 +339,7 @@ const Preview = () => {
         </div>
       </motion.div>
 
-{/* Contact */}
+      {/* Contact */}
       <div className="bg-[#0A101E] text-white py-16">
         <div className="container mx-auto px-8 md:px-16 lg:px-24">
           <h2 className="text-yellow text-center text-3xl font-bold mb-8">CONTACT</h2>

@@ -9,8 +9,7 @@ import { apiGetVolunteering } from '../../../services/volunteering';
 import { apiGetEducation } from '../../../services/education';
 import { apiGetExperiences } from '../../../services/experiences';
 import PageLoader from '../../../components/PageLoader';
-// Example icon from Heroicons
-
+import CountUp from "react-countup"
 
 const Overview = () => {
 
@@ -35,17 +34,17 @@ const Overview = () => {
         apiGetVolunteering(),
         apiGetEducation(),
         apiGetExperiences(),
-      ])
+      ]);
 
-      console.log("Total skills: ", totalSkills)
+      console.log("Total skills: ", totalSkills.data.Skills.length);
 
       const newData = {
-        skills: totalSkills.length,
-        projects: totalProjects.length,
-        achievements: totalAchievements.length,
-        volunteering: totalVolunteering.length,
-        education: totalEducation.length,
-        experiences: totalExperiences.length,
+        skills: totalSkills.data.Skills.length,
+        projects: totalProjects.data.Projects.length,
+        achievements: totalAchievements.data.Achievements.length,
+        volunteering: totalVolunteering.data.Volunteering.length,
+        education: totalEducation.data.education.length,
+        experiences: totalExperiences.data.experiences.length,
       }
 
       console.log(newData)
@@ -54,7 +53,7 @@ const Overview = () => {
 
     } catch (error) {
       console.log(error)
-    }finally{
+    } finally {
       setIsLoading(false)
     }
   }
@@ -74,42 +73,42 @@ const Overview = () => {
 
   return (
     <>
-    {
-      isLoading ? (
-        <PageLoader/>
-      ) : (
-        <div className="min-h-screen text-white">
-      {/* Hero Section */}
-      <div className="relative">
-        <img src={heroImg} alt="Hero" className="w-full h-64 object-cover" />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white animate-fade-in">Welcome to Your Dashboard</h1>
-        </div>
-      </div>
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-40 py-10">
-        {sections.map((section, index) => (
-          <Link to={`/${section.name.toLowerCase()}`} key={index} className="group">
-            <div className="bg-[#ecb2708e] p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:scale-105">
-              
-              <div className="pt-2 text-center">
-                <h2 className="text-2xl text-black font-semibold">{section.name}</h2>
-                <p className="text-lg text-black pt-4">{section.count} </p>
-                
+      {
+        isLoading ? (
+          <PageLoader />
+        ) : (
+          <div className="min-h-screen text-white">
+            {/* Hero Section */}
+            <div className="relative">
+              <img src={heroImg} alt="Hero" className="w-full h-64 object-cover" />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h1 className="text-4xl font-bold text-white animate-fade-in">Welcome to Your Dashboard</h1>
               </div>
             </div>
-          </Link>
-        ))}
-      </div>
-      <div className='flex items-center justify-center mb-4'>
-        <Link to="/preview"><button 
-        className="h-10 w-40 px-3 py-2 bg-primary text-white font-bold border-2 rounded-3xl hover:bg-secondary"
-        >Preview Page</button></Link>
-      </div>
-    </div>
-      )
-        
-    }
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-40 py-10">
+              {sections.map((section, index) => (
+                <Link to={`/${section.name.toLowerCase()}`} key={index} className="bg-[#ecb2708e] p-6 rounded-lg shadow-lg transform transition-transform duration-300 group-hover:scale-105 flex flex-col items-center text-center">
+                    <h2 className="text-2xl text-black font-semibold">{section.name}</h2>
+                    <CountUp
+                      className="text-lg text-black pt-4 font-semibold"
+                      start={0}
+                      end={data[section.name.toLowerCase()]}
+                    />
+                </Link>
+              ))}
+
+
+            </div>
+            <div className='flex items-center justify-center mb-4'>
+              <Link to="/preview"><button
+                className="h-10 w-40 px-4 py-2 bg-primary text-white font-bold border-2 rounded-3xl hover:bg-secondary"
+              >Preview Page</button></Link>
+            </div>
+          </div>
+        )
+
+      }
     </>
   );
 };

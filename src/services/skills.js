@@ -9,12 +9,12 @@ export const apiGetSKills = async () => {
 return apiClient.get("/skills")
 }
 
-export const apiGetSkillById = async () => {
+export const apiGetSkillById = async (id) => {
     return apiClient.get(`/skills/${id}`)
 }
 
-export const apiUpdateSkill = async () => {
-    return apiClient.patch(`/skills/${id}`)
+export const apiUpdateSkill = async (id, payload) => {
+    return apiClient.patch(`/skills/${id}`, payload)
 }
 
 export const apiDeleteSkill = async (id) => {

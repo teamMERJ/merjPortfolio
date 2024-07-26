@@ -17,7 +17,7 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ reValidateMode: "onBlur", mode: "all" });
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -33,10 +33,8 @@ const SignIn = () => {
       //set access token in local storage
       localStorage.setItem("accessToken", res.data.accessToken)
       toast.success(res.data.message)
-      setTimeout(() => {
         // redirect user to dashboard
       navigate("/dashboard");
-      }, 5000)
       
     } catch (error) {
       console.log(error);
@@ -83,7 +81,7 @@ const SignIn = () => {
               <input
                 type="password"
                 id="password"
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 text-black rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent"
                 placeholder="Password"
                 {...register("password", {
                   required: "Password is Required in this Field",
